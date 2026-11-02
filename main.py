@@ -7,15 +7,25 @@ except (ModuleNotFoundError, ImportError):
     class RobotClass:
         def execute_command(self, action: str):
             print(f"[MOCK HARDWARE] Command sent: {action.upper()}")
+            return True, f"Rover action: {action.upper()}"
 
 app = FastAPI()
 robot = RobotClass()
 
+
 @app.post("/cmd/{action}")
 def handle_command(action: str):
-    robot.execute_command(action)
-    print(f"Hardware executed: {action.upper()}")
-    return {"status": f"Rover action: {action.upper()}"}
+    cmd = action.upper()
+    result = robot.execute_command(cmd)
+
+    # Handle tuple returned by real robot.py vs mock fallback
+    if isinstance(result, tuple):
+        _, message = result
+    else:
+        message = f"Rover action: {cmd}"
+
+    print(f"Hardware executed: {cmd}")
+    return {"status": message}
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -109,13 +119,13 @@ def home():
             <div class="card">
                 <h2>Controls</h2>
                 <div class="d-pad">
-                    <button onclick="sendCmd('forward')">FORWARD</button>
+                    <button onclick="sendCmd('FWD')">FORWARD</button>
                     <div class="row">
-                        <button onclick="sendCmd('left')">LEFT</button>
-                        <button class="stop" onclick="sendCmd('stop')">STOP</button>
-                        <button onclick="sendCmd('right')">RIGHT</button>
+                        <button onclick="sendCmd('LEFT')">LEFT</button>
+                        <button class="stop" onclick="sendCmd('STOP')">STOP</button>
+                        <button onclick="sendCmd('RIGHT')">RIGHT</button>
                     </div>
-                    <button onclick="sendCmd('backward')">BACKWARD</button>
+                    <button onclick="sendCmd('BACKWD')">BACKWARD</button>
                 </div>
                 <p id="status-display">Status: Standing by...</p>
             </div>
