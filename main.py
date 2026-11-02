@@ -18,7 +18,6 @@ def handle_command(action: str):
     cmd = action.upper()
     result = robot.execute_command(cmd)
 
-    # Handle tuple returned by real robot.py vs mock fallback
     if isinstance(result, tuple):
         _, message = result
     else:
