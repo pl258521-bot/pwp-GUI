@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rover Control Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="login-wrapper">
+        <div class="login-card">
+            <h2>Rover Access Login</h2>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+            <p id="login-error">Invalid username or password</p>
+            <button class="login-btn" onclick="handleLogin()">LOG IN</button>
+        </div>
+    </div>
+
+    <!-- DASHBOARD GRID -->
+    <div id="dashboard-screen" class="dashboard-grid">
+        <div class="card">
+            <h2>Video Stream 1</h2>
+            <div class="camera-box">
+                <p>[ LIVE STREAM 1 PLACEHOLDER ]</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Controls</h2>
+            <div class="d-pad">
+                <button onclick="sendCmd('FWD')">FORWARD</button>
+                <div class="row">
+                    <button onclick="sendCmd('LEFT')">LEFT</button>
+                    <button class="stop" onclick="sendCmd('STOP')">STOP</button>
+                    <button onclick="sendCmd('RIGHT')">RIGHT</button>
+                </div>
+                <button onclick="sendCmd('BACKWD')">BACKWARD</button>
+            </div>
+            <p id="status-display">Status: Standing by...</p>
+        </div>
+
+        <div class="card">
+            <h2>Video Stream 2</h2>
+            <div class="camera-box">
+                <p>[ LIVE STREAM 2 PLACEHOLDER ]</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>User Log</h2>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
