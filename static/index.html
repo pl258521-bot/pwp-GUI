@@ -7,10 +7,10 @@
 </head>
 <body>
 
-    <!-- LOGIN SCREEN -->
+    <!-- Login / Sign-up Card -->
     <div id="login-screen" class="login-wrapper">
         <div class="login-card">
-            <h2>Rover Access Login</h2>
+            <h2>Rover Access Portal</h2>
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" placeholder="Enter username" autocomplete="off">
@@ -20,11 +20,14 @@
                 <input type="password" id="password" placeholder="Enter password">
             </div>
             <p id="login-error">Invalid username or password</p>
-            <button class="login-btn" onclick="handleLogin()">LOG IN</button>
+            <div class="button-row">
+                <button class="login-btn" onclick="handleLogin()">LOG IN</button>
+                <button class="signup-btn" onclick="handleRegister()">SIGN UP</button>
+            </div>
         </div>
     </div>
 
-    <!-- DASHBOARD GRID -->
+    <!-- Main Dashboard -->
     <div id="dashboard-screen" class="dashboard-grid">
         <div class="card">
             <h2>Video Stream 1</h2>
@@ -33,6 +36,7 @@
             </div>
         </div>
 
+        <!-- Rover Controls -->
         <div class="card">
             <h2>Controls</h2>
             <div class="d-pad">
