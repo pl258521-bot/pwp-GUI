@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+# Import hardware driver or go to mock mode for laptop testing
 try:
     from robot import RobotClass
 except (ModuleNotFoundError, ImportError):
@@ -13,15 +14,15 @@ except (ModuleNotFoundError, ImportError):
 app = FastAPI()
 robot = RobotClass()
 
-# Mount the static directory to serve CSS, JS, and HTML
+# Serve static assets (CSS, JS)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-
+# Serve the main dashboard page
 @app.get("/")
 def home():
     return FileResponse("static/index.html")
 
-
+# Receive motor commands from dashboard
 @app.post("/cmd/{action}")
 def handle_command(action: str):
     cmd = action.upper()
